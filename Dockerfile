@@ -30,9 +30,10 @@ COPY installserver.sh /
 
 RUN /installserver.sh \
 	&& rm -f /credentials.sh \
-	&& rm -f /installserver.sh
+	&& rm -f /installserver.sh \
+	&& echo "Cache Break"
 
 WORKDIR /arma3
 
 STOPSIGNAL SIGINT
-CMD ["./arma3server", "-par=params", "-profiles=/profiles"]
+ENTRYPOINT ["./arma3server", "-profiles=/profiles"]
