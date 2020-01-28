@@ -25,13 +25,15 @@ EXPOSE 2303/udp
 EXPOSE 2304/udp
 EXPOSE 2305/udp
 
-COPY credentials.sh /
 COPY installserver.sh /
 
+#These WILL be baked into your docker layer, so do NOT push this docker container anywhere.
+ARG STEAM_GUARD_CODE
+ARG STEAM_USERNAME
+ARG STEAM_PASSWORD
+
 RUN /installserver.sh \
-	&& rm -f /credentials.sh \
-	&& rm -f /installserver.sh \
-	&& echo "Cache Break"
+	&& rm -f /installserver.sh
 
 WORKDIR /arma3
 
